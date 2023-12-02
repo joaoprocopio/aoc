@@ -41,14 +41,14 @@ export const trebuchet = (text: string[]) => {
     })
   })
 
-  const sum = Object.values(lines).reduce((acc, curr) => {
-    if (!curr) return acc
+  const sum = Object.values(lines).reduce((accumulator, current) => {
+    if (!current) return accumulator
 
-    const first = curr[0]
-    const last = curr[curr.length - 1]
+    const first = current[0]
+    const last = current[current.length - 1]
     const number = +(first + last)
 
-    return acc + number
+    return accumulator + number
   }, 0)
 
   return sum
