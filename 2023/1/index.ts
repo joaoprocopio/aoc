@@ -28,4 +28,28 @@
  * Consider your entire calibration document. What is the sum of all of the calibration values?
  */
 
-export const sum = (a: number, b: number) => a + b
+export const trebuchet = (text: string[]) => {
+  const lines: Record<string, string[] | undefined> = {}
+
+  text.forEach((line, lineIndex) => {
+    const chars = line.split("")
+
+    chars.forEach((char) => {
+      if (isNaN(+char)) return
+
+      lines[lineIndex] = lines[lineIndex]?.concat(char) || [char]
+    })
+  })
+
+  const sum = Object.values(lines).reduce((acc, curr) => {
+    if (!curr) return acc
+
+    const first = curr[0]
+    const last = curr[curr.length - 1]
+    const number = +(first + last)
+
+    return acc + number
+  }, 0)
+
+  return sum
+}
