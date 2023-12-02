@@ -5,6 +5,12 @@
   "include": ["./**/*.ts"],
 
   "compilerOptions": {
+    "moduleResolution": "Bundler",
+    "module": "ESNext",
+    "target": "ESNext",
+
+    "types": ["vitest/globals"],
+
     "rootDir": ".",
     "baseUrl": "."
   }
