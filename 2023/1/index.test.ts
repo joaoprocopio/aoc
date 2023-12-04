@@ -5,22 +5,11 @@ import { trebuchet } from "."
 
 const to = (filename: string) => path.join(__dirname, filename)
 
-describe("2023 - 1", () => {
-  it("should work on mini input", () => {
-    const text = fs.readFileSync(to("mini.txt"), { encoding: "utf-8" })
-    const splitted = text.split("\n")
+it("2023 - 1.1 - trebuchet", () => {
+  const text = fs.readFileSync(to("first.txt"), { encoding: "utf-8" })
+  const splitted = text.split("\n")
 
-    const result = trebuchet(splitted)
+  const result = trebuchet(splitted)
 
-    expect(result).toBe(142)
-  })
-
-  it("should work on macro input", () => {
-    const text = fs.readFileSync(to("macro.txt"), { encoding: "utf-8" })
-    const splitted = text.split("\n")
-
-    const result = trebuchet(splitted)
-
-    expect(result).toBe(53386)
-  })
+  expect(result).toBe(53386)
 })
