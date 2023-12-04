@@ -28,26 +28,26 @@
  * Consider your entire calibration document. What is the sum of all of the calibration values?
  */
 
-export const trebuchet = (lines: string[]) => {
+export const trebuchet = (text: string[]) => {
   let total = 0
-  const numbersPerLine = new Map<number, string[]>()
+  const lines = new Map()
 
-  for (let lineIndex = 0; lineIndex < lines.length; lineIndex += 1) {
-    const line = lines[lineIndex]
+  for (let lineIndex = 0; lineIndex < text.length; lineIndex += 1) {
+    const line = text[lineIndex]
 
     for (let charIndex = 0; charIndex < line.length; charIndex += 1) {
-      const number = line[charIndex]
+      const char = line[charIndex]
 
-      if (isNaN(+number)) continue
+      if (isNaN(+char)) continue
 
-      const actual = numbersPerLine.get(lineIndex)
-      const next = actual?.concat(number) || [number]
+      const current = lines.get(lineIndex)
+      const next = current?.concat(char) || [char]
 
-      numbersPerLine.set(lineIndex, next)
+      lines.set(lineIndex, next)
     }
   }
 
-  for (const [, numbers] of numbersPerLine) {
+  for (const [, numbers] of lines) {
     const first = numbers[0]
     const last = numbers[numbers.length - 1]
     const number = +(first + last)
