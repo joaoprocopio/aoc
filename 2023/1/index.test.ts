@@ -3,13 +3,12 @@ import path from "path"
 
 import { trebuchet } from "."
 
-const to = (filename: string) => path.join(__dirname, filename)
+const file = path.join(__dirname, "input.txt")
+const content = fs.readFileSync(file, { encoding: "utf-8" })
+const text = content.split("\n")
 
 it("2023 - 1.1 - trebuchet", () => {
-  const text = fs.readFileSync(to("input.txt"), { encoding: "utf-8" })
-  const splitted = text.split("\n")
-
-  const result = trebuchet(splitted)
+  const result = trebuchet(text)
 
   expect(result).toBe(53386)
 })
