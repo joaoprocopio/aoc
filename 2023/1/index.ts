@@ -30,9 +30,22 @@
  * Consider your entire calibration document. What is the sum of all of the calibration values?
  */
 
-export const trebuchet = (text: string[]) => {
+const totalize = (entries: Iterable<[number, string[]]>) => {
   let total = 0
-  const lines = new Map()
+
+  for (const [, numbers] of entries) {
+    const first = numbers[0]
+    const last = numbers[numbers.length - 1]
+    const number = +(first + last)
+
+    total += number
+  }
+
+  return total
+}
+
+export const trebuchet = (text: string[]) => {
+  const lines = new Map<number, string[]>()
 
   for (let lineIndex = 0; lineIndex < text.length; lineIndex += 1) {
     const line = text[lineIndex]
@@ -49,13 +62,5 @@ export const trebuchet = (text: string[]) => {
     }
   }
 
-  for (const [, numbers] of lines) {
-    const first = numbers[0]
-    const last = numbers[numbers.length - 1]
-    const number = +(first + last)
-
-    total += number
-  }
-
-  return total
+  return totalize(lines)
 }
