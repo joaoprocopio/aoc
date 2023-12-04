@@ -53,3 +53,29 @@ export const trebuchet = (text: string[]) => {
 
   return sum
 }
+
+export const trebuchet2 = (text: string[]) => {
+  const lines: Record<string, string[] | undefined> = {}
+
+  text.forEach((line, lineIndex) => {
+    const chars = line.split("")
+
+    chars.forEach((char) => {
+      if (isNaN(+char)) return
+
+      lines[lineIndex] = lines[lineIndex]?.concat(char) || [char]
+    })
+  })
+
+  const sum = Object.values(lines).reduce((accumulator, current) => {
+    if (!current) return accumulator
+
+    const first = current[0]
+    const last = current[current.length - 1]
+    const number = +(first + last)
+
+    return accumulator + number
+  }, 0)
+
+  return sum
+}
