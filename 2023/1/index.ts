@@ -28,54 +28,32 @@
  * Consider your entire calibration document. What is the sum of all of the calibration values?
  */
 
-export const trebuchet = (text: string[]) => {
-  const lines: Record<string, string[] | undefined> = {}
+export const trebuchet = (lines: string[]) => {
+  let total = 0
+  const numbersPerLine = new Map<number, string[]>()
 
-  text.forEach((line, lineIndex) => {
-    const chars = line.split("")
+  for (let lineIndex = 0; lineIndex < lines.length; lineIndex += 1) {
+    const line = lines[lineIndex]
 
-    chars.forEach((char) => {
-      if (isNaN(+char)) return
+    for (let charIndex = 0; charIndex < line.length; charIndex += 1) {
+      const number = line[charIndex]
 
-      lines[lineIndex] = lines[lineIndex]?.concat(char) || [char]
-    })
-  })
+      if (isNaN(+number)) continue
 
-  const sum = Object.values(lines).reduce((accumulator, current) => {
-    if (!current) return accumulator
+      const actual = numbersPerLine.get(lineIndex)
+      const next = actual?.concat(number) || [number]
 
-    const first = current[0]
-    const last = current[current.length - 1]
+      numbersPerLine.set(lineIndex, next)
+    }
+  }
+
+  for (const [, numbers] of numbersPerLine) {
+    const first = numbers[0]
+    const last = numbers[numbers.length - 1]
     const number = +(first + last)
 
-    return accumulator + number
-  }, 0)
+    total += number
+  }
 
-  return sum
-}
-
-export const trebuchet2 = (text: string[]) => {
-  const lines: Record<string, string[] | undefined> = {}
-
-  text.forEach((line, lineIndex) => {
-    const chars = line.split("")
-
-    chars.forEach((char) => {
-      if (isNaN(+char)) return
-
-      lines[lineIndex] = lines[lineIndex]?.concat(char) || [char]
-    })
-  })
-
-  const sum = Object.values(lines).reduce((accumulator, current) => {
-    if (!current) return accumulator
-
-    const first = current[0]
-    const last = current[current.length - 1]
-    const number = +(first + last)
-
-    return accumulator + number
-  }, 0)
-
-  return sum
+  return total
 }
