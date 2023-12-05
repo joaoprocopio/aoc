@@ -1,8 +1,8 @@
 def trebuchet(lines: list[str]):
-    total = 0
+    total: int = 0
 
     for line in lines:
-        numbers = []
+        numbers: list[str] = []
 
         for char in line:
             if not char.isdigit():
