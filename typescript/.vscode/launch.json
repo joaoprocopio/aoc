@@ -5,7 +5,7 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "Debug File",
+      "name": "TypeScript: Debug File",
 
       "type": "node",
       "request": "launch",
@@ -22,7 +22,7 @@
     },
 
     {
-      "name": "Debug Test",
+      "name": "TypeScript: Debug Test",
 
       "type": "node",
       "request": "launch",
