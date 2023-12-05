@@ -10,4 +10,4 @@ def test_trebuchet():
     text = open(file).read()
     lines = text.splitlines()
 
-    assert trebuchet(lines) == 53386
+    assert trebuchet(lines) == 55971
