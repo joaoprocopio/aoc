@@ -1,4 +1,4 @@
-def trebuchet_1(lines: list[str]):
+def trebuchet_1(lines: list[str]) -> int:
     total: int = 0
 
     for line in lines:
@@ -15,8 +15,8 @@ def trebuchet_1(lines: list[str]):
     return total
 
 
-def trebuchet_2(lines: list[str]):
-    numbers: tuple[str] = (
+def trebuchet_2(lines: list[str]) -> int:
+    numbers = (
         "one",
         "two",
         "three",
@@ -33,11 +33,13 @@ def trebuchet_2(lines: list[str]):
         digits: list[str] = []
 
         for char_index, char in enumerate(line):
-            sub_string = line[char_index:]
+            sub_string: str = line[char_index:]
 
             for digit_index, digit in enumerate(numbers):
-                if sub_string.startswith(digit):
-                    digits.append(str(digit_index + 1))
+                if not sub_string.startswith(digit):
+                    continue
+
+                digits.append(str(digit_index + 1))
 
             if not char.isdigit():
                 continue
