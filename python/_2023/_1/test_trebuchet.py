@@ -2,8 +2,7 @@ from pathlib import Path
 
 from _2023._1.trebuchet import trebuchet_1, trebuchet_2
 
-dir = Path(__file__).parent
-file = dir / "trebuchet.txt"
+file = Path(__file__).parent / "trebuchet.txt"
 text = open(file).read()
 lines = text.splitlines()
 
