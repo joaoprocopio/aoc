@@ -1,4 +1,4 @@
-def trebuchet(lines: list[str]):
+def trebuchet_1(lines: list[str]):
     total: int = 0
 
     for line in lines:
