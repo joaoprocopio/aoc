@@ -1,0 +1,19 @@
+[tool.poetry]
+name = "advent-of-code"
+version = "0.0.0"
+description = "Python Advent of Code Exercises"
+authors = ["joaoprocopio <joaovitorcprocopio@gmail.com>"]
+
+[tool.poetry.dependencies]
+python = "^3.12"
+
+
+[tool.poetry.group.dev.dependencies]
+black = "^23.11.0"
+flake8 = "^6.1.0"
+isort = "^5.12.0"
+pytest = "^7.4.3"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

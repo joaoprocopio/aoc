@@ -1,5 +1,6 @@
 {
   "private": true,
+  "name": "advent-of-code",
   "type": "module",
   "devDependencies": {
     "@tsconfig/node18": "^18.2.2",
