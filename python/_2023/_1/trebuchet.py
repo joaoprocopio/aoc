@@ -83,17 +83,7 @@ def trebuchet_1(lines: list[str]):
 
 
 def trebuchet_2(lines: list[str]):
-    numbers = (
-        "one",
-        "two",
-        "three",
-        "four",
-        "five",
-        "six",
-        "seven",
-        "eight",
-        "nine",
-    )
+    numbers = ("one", "two", "three", "four", "five", "six", "seven", "eight", "nine")
     total = 0
 
     for line in lines:
