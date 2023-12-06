@@ -1,6 +1,9 @@
 # https://adventofcode.com/2023/day/1
 
 
+import sys
+
+
 def trebuchet_1(lines: list[str]):
     total = 0
 

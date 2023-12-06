@@ -1,10 +1,10 @@
 from pathlib import Path
 
-from _2023._2.cube_conundrum import cube_conundrum
+from _2023._2.cube_conundrum import cube_conundrum_1
 
-dir = Path(__file__).parent
-file = dir / "trebuchet.txt"
+file = Path(__file__).parent / "cube_conundrum.txt"
+lines = open(file).read().splitlines()
 
 
-def test_cube_conundrum():
-    assert cube_conundrum() is None
+def test_cube_conundrum_1():
+    assert cube_conundrum_1(lines) is None
