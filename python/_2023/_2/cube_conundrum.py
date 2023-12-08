@@ -50,6 +50,53 @@ Determine which games would have been possible if the bag had been loaded with
 only 12 red cubes, 13 green cubes, and 14 blue cubes. What is the sum of the IDs of those games?
 """
 
+config = {
+    "red": 12,
+    "green": 13,
+    "blue": 14,
+}
+
+
+def parse_games(_games: str):
+    games = []
+
+    for game_index, game in enumerate(_games.split(";")):
+        colors = game.split(",")
+
+        for _color in colors:
+            _quantity, color = _color.strip().split(" ")
+            quantity = int(_quantity)
+            current_game = {}
+
+            if not (game_index < len(games)):
+                current_game[color] = quantity
+
+                games.append(current_game)
+
+                continue
+
+            current_game = games[game_index]
+
+            games[game_index] = current_game | {color: quantity}
+
+    return games
+
+
+def parse_game(line: str):
+    game = {}
+    id, games = line.split(":")
+
+    game["id"] = int(id.replace("Game ", ""))
+    game["games"] = parse_games(games)
+
+    return game
+
 
 def cube_conundrum_1(lines: list[str]):
-    pass
+    possible = 0
+    games = [parse_game(line) for line in lines]
+
+    for game in games:
+        print(games)
+
+    return possible

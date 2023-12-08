@@ -7,4 +7,4 @@ lines = open(file).read().splitlines()
 
 
 def test_cube_conundrum_1():
-    assert cube_conundrum_1(lines) is None
+    assert cube_conundrum_1(lines) is not None
