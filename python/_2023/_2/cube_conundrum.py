@@ -57,37 +57,37 @@ config = {
 }
 
 
-def parse_games(_games: str):
-    games = []
+def parse_bags(_bags: str):
+    bags = []
 
-    for game_index, game in enumerate(_games.split(";")):
-        colors = game.split(",")
+    for bag_index, bag in enumerate(_bags.split(";")):
+        cubes = bag.split(",")
 
-        for _color in colors:
-            _quantity, color = _color.strip().split(" ")
-            quantity = int(_quantity)
+        for _cube in cubes:
             current_game = {}
+            _quantity, color = _cube.strip().split(" ")
+            quantity = int(_quantity)
 
-            if not (game_index < len(games)):
+            if not (bag_index < len(bags)):
                 current_game[color] = quantity
 
-                games.append(current_game)
+                bags.append(current_game)
 
                 continue
 
-            current_game = games[game_index]
+            current_game = bags[bag_index]
 
-            games[game_index] = current_game | {color: quantity}
+            bags[bag_index] = current_game | {color: quantity}
 
-    return games
+    return bags
 
 
 def parse_game(line: str):
     game = {}
-    id, games = line.split(":")
+    id, bags = line.split(":")
 
     game["id"] = int(id.replace("Game ", ""))
-    game["games"] = parse_games(games)
+    game["bags"] = parse_bags(bags)
 
     return game
 
