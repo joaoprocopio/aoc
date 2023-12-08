@@ -57,46 +57,43 @@ config = {
 }
 
 
-def parse_bags(_bags: str):
-    bags = []
+def _parse_bags(_bags: str):
+    bags: list[dict[str, int]] = []
 
     for bag_index, bag in enumerate(_bags.split(";")):
         cubes = bag.split(",")
 
+        current_bag = {}
+
         for _cube in cubes:
-            current_game = {}
             _quantity, color = _cube.strip().split(" ")
             quantity = int(_quantity)
 
-            if not (bag_index < len(bags)):
-                current_game[color] = quantity
-
-                bags.append(current_game)
-
+            if not bag_index < len(bags):
+                current_bag[color] = quantity
+                bags.append(current_bag)
                 continue
 
-            current_game = bags[bag_index]
-
-            bags[bag_index] = current_game | {color: quantity}
+            current_bag = bags[bag_index]
+            bags[bag_index] = current_bag | {color: quantity}
 
     return bags
 
 
 def parse_game(line: str):
-    game = {}
     id, bags = line.split(":")
 
-    game["id"] = int(id.replace("Game ", ""))
-    game["bags"] = parse_bags(bags)
-
-    return game
+    return {
+        "id": int(id.replace("Game ", "")),
+        "bags": _parse_bags(bags),
+    }
 
 
 def cube_conundrum_1(lines: list[str]):
     possible = 0
-    games = [parse_game(line) for line in lines]
 
-    for game in games:
-        print(games)
+    for line in lines:
+        game = parse_game(line)
+        print(game)
 
     return possible
