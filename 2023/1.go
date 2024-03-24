@@ -6,6 +6,7 @@ import (
 	"os"
 	"path/filepath"
 	"runtime"
+	"strconv"
 	"unicode"
 )
 
@@ -37,17 +38,40 @@ func main() {
 		panic(err)
 	}
 
+	total := 0
 	scanner := bufio.NewScanner(file)
 
 	for scanner.Scan() {
-		text := scanner.Text()
+		line := scanner.Text()
 
-		for _, char := range text {
-			if !unicode.IsDigit(char) {
-				break
+		first := ""
+		last := ""
+
+		for _, char := range line {
+			isDigit := unicode.IsDigit(char)
+
+			if !isDigit {
+				continue
 			}
 
-			fmt.Println(unicode.IsDigit(char), string(char))
+			value := string(char)
+
+			if first == "" && last == "" {
+				first = value
+				last = value
+			}
+
+			last = value
 		}
+
+		integer, err := strconv.Atoi(first + last)
+
+		if err != nil {
+			panic(err)
+		}
+
+		total += integer
 	}
+
+	fmt.Println(total)
 }
