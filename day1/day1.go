@@ -1,3 +1,4 @@
+// https://adventofcode.com/2023/day/1
 package main
 
 import (
@@ -9,8 +10,6 @@ import (
 	"strconv"
 	"unicode"
 )
-
-// https://adventofcode.com/2023/day/1
 
 func relative(path string) (string, bool) {
 	_, callerPath, _, ok := runtime.Caller(0)
@@ -26,7 +25,7 @@ func relative(path string) (string, bool) {
 }
 
 func main() {
-	path, ok := relative("./1.txt")
+	path, ok := relative("./day1.txt")
 
 	if !ok {
 		panic(ok)
