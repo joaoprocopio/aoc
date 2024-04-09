@@ -8,15 +8,15 @@ def trebuchet():
     total = 0
 
     for line in lines:
-        numbers: list[str] = []
+        line_numbers: list[str] = []
 
         for char in line:
             if not char.isdigit():
                 continue
 
-            numbers.append(char)
+            line_numbers.append(char)
 
-        total += int(numbers[0] + numbers[-1])
+        total += int(line_numbers[0] + line_numbers[-1])
 
     print(total)
 
