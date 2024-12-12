@@ -13,16 +13,12 @@ import (
 func main() {
 	cwd, err := getcwd()
 
-	if err != nil {
-		panic(err)
-	}
+	check(err)
 
 	path := filepath.Join(cwd, "./input.txt")
 	file, err := os.Open(path)
 
-	if err != nil {
-		panic("could not open this file")
-	}
+	check(err)
 
 	defer file.Close()
 
@@ -30,6 +26,10 @@ func main() {
 
 	for scanner.Scan() {
 		fmt.Println(scanner.Text())
+	}
+
+	if err := scanner.Err(); err != nil {
+		check(err)
 	}
 }
 
@@ -43,4 +43,10 @@ func getcwd() (string, error) {
 	cwd := filepath.Dir(file)
 
 	return cwd, nil
+}
+
+func check(err error) {
+	if err != nil {
+		panic(err)
+	}
 }
