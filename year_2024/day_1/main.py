@@ -1,6 +1,7 @@
-import os
+from pathlib import Path
 
-cwd = os.getcwd()
+dir = Path(__file__).parent
+input = dir / "sample.txt"
+file = open(input)
 
-
-print(cwd)
+print(file.read())
