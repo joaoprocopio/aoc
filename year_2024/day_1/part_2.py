@@ -44,11 +44,13 @@ while len(left_heap) > 0 and len(right_heap) > 0:
     left_heap_smallest = heapq.heappop(left_heap)
     right_heap_smallest = heapq.heappop(right_heap)
 
-    min_distance = min(left_heap_smallest, right_heap_smallest)
-    max_distance = max(left_heap_smallest, right_heap_smallest)
+    if left_heap_smallest not in right_heap_occurrences:
+        continue
 
-    distance_diff = max_distance - min_distance
-    total_distance = total_distance + distance_diff
+    occurrences_count = right_heap_occurrences[left_heap_smallest]
+    similarity_score = left_heap_smallest * occurrences_count
+
+    total_distance += similarity_score
 
 
 print(total_distance)
