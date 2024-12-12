@@ -2,12 +2,15 @@ package utils
 
 import (
 	"errors"
+	"fmt"
 	"path/filepath"
 	"runtime"
 )
 
-func ExecutableDirname() (string, error) {
-	_, file, _, ok := runtime.Caller(0)
+func ExecutableDirname(skip int) (string, error) {
+	_, file, _, ok := runtime.Caller(skip)
+
+	fmt.Println(file)
 
 	if !ok {
 		return "", errors.New("could not get the executable path")

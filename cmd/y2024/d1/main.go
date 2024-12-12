@@ -11,7 +11,7 @@ import (
 )
 
 func main() {
-	cwd, err := utils.ExecutableDirname()
+	cwd, err := utils.ExecutableDirname(1)
 
 	utils.CheckErr(err)
 
