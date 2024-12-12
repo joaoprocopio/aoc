@@ -2,18 +2,17 @@ package utils
 
 import (
 	"errors"
-	"fmt"
 	"path/filepath"
 	"runtime"
 )
 
+var ErrUnreadable = errors.New("Unreadable file path")
+
 func ExecutableDirname(skip int) (string, error) {
 	_, file, _, ok := runtime.Caller(skip)
 
-	fmt.Println(file)
-
 	if !ok {
-		return "", errors.New("could not get the executable path")
+		return "", ErrUnreadable
 	}
 
 	cwd := filepath.Dir(file)
