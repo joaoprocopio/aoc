@@ -15,7 +15,7 @@ func main() {
 	for scanner.Scan() {
 		text := scanner.Text()
 
-		fmt.Println(text, " TEST")
+		fmt.Println(text)
 	}
 
 	if err := scanner.Err(); err != nil {

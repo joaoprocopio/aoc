@@ -10,12 +10,6 @@ import (
 
 var ErrUnreadable = errors.New("Unreadable file path")
 
-func PanicIfErr(err error) {
-	if err != nil {
-		panic(err)
-	}
-}
-
 func ExecutableDirname(skip int) (string, error) {
 	_, file, _, ok := runtime.Caller(skip)
 
