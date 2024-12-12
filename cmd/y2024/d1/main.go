@@ -2,33 +2,23 @@
 package main
 
 import (
-	"bufio"
 	"fmt"
-	"os"
-	"path/filepath"
 
 	"github.com/joaoprocopio/aoc/internals/utils"
 )
 
 func main() {
-	cwd, err := utils.ExecutableDirname(1)
-
-	utils.CheckErr(err)
-
-	path := filepath.Join(cwd, "./input.txt")
-	file, err := os.Open(path)
-
-	utils.CheckErr(err)
-
+	file, scanner, err := utils.FileScanner("./sample.txt", 2)
+	utils.PanicIfErr(err)
 	defer file.Close()
 
-	scanner := bufio.NewScanner(file)
-
 	for scanner.Scan() {
-		fmt.Println(scanner.Text())
+		text := scanner.Text()
+
+		fmt.Println(text, " TEST")
 	}
 
 	if err := scanner.Err(); err != nil {
-		utils.CheckErr(err)
+		utils.PanicIfErr(err)
 	}
 }
