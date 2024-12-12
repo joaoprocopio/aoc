@@ -3,22 +3,22 @@ package main
 
 import (
 	"bufio"
-	"errors"
 	"fmt"
 	"os"
 	"path/filepath"
-	"runtime"
+
+	"github.com/joaoprocopio/aoc/internals/utils"
 )
 
 func main() {
-	cwd, err := getcwd()
+	cwd, err := utils.ExecutableDirname()
 
-	check(err)
+	utils.CheckErr(err)
 
 	path := filepath.Join(cwd, "./input.txt")
 	file, err := os.Open(path)
 
-	check(err)
+	utils.CheckErr(err)
 
 	defer file.Close()
 
@@ -29,24 +29,6 @@ func main() {
 	}
 
 	if err := scanner.Err(); err != nil {
-		check(err)
-	}
-}
-
-func getcwd() (string, error) {
-	_, file, _, ok := runtime.Caller(0)
-
-	if !ok {
-		return "", errors.New("could not get the executable path")
-	}
-
-	cwd := filepath.Dir(file)
-
-	return cwd, nil
-}
-
-func check(err error) {
-	if err != nil {
-		panic(err)
+		utils.CheckErr(err)
 	}
 }
