@@ -36,10 +36,6 @@ with open(file_path, "r") as file:
             if curr_report_variation > 0:
                 has_increased = True
 
-            # checa se não teve variação e já considera como unsafe
-            if curr_report_variation == 0:
-                break
-
             # se por acaso tiver uma variação positiva junto com uma negativa é unsafe também
             if has_decreased and has_increased:
                 break
