@@ -10,9 +10,13 @@ SAFE_VARIATION = range(MIN_SAFE_VARIATION, MAX_SAFE_VARIATION + 1)
 
 
 with open(file_path, "r") as file:
+    safe_reports = 0
+
     for report_index, report in enumerate(file):
         last_visited_level = 0
         curr_report_variation = 0
+        has_increased = False
+        has_decreased = False
 
         for level_index, level in enumerate(report.split(" ")):
             level = int(level)
@@ -22,12 +26,29 @@ with open(file_path, "r") as file:
                 last_visited_level = level
                 continue
 
-            # só precisamos saber o tamanho da variação, independente se for uma variação positiva ou negativa
-            curr_report_variation = abs(last_visited_level - level)
+            curr_report_variation = last_visited_level - level
 
-            if curr_report_variation not in SAFE_VARIATION:
-                print(last_visited_level, level, curr_report_variation)
+            # checa se a variação é negativa, e marca a flag
+            if curr_report_variation < 0:
+                has_decreased = True
+
+            # checa se a variação é positiva, e marca a flag
+            if curr_report_variation > 0:
+                has_increased = True
+
+            # checa se não teve variação e já considera como unsafe
+            if curr_report_variation == 0:
+                break
+
+            # se por acaso tiver uma variação positiva junto com uma negativa é unsafe também
+            if has_decreased and has_increased:
+                break
+
+            # checa se a variação não está entre 1 e 3
+            if abs(curr_report_variation) not in SAFE_VARIATION:
                 break
 
             # agora que fizemos as comparações podemos comparar o `level` atual como visitado e ir pro próximo
             last_visited_level = level
+
+    print(safe_reports)
