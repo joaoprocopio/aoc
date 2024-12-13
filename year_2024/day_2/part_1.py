@@ -13,12 +13,15 @@ with open(file_path, "r") as file:
     safe_reports = 0
 
     for report_index, report in enumerate(file):
+        report = report.split(" ")
+
         last_visited_level = 0
         curr_report_variation = 0
+
         has_increased = False
         has_decreased = False
 
-        for level_index, level in enumerate(report.split(" ")):
+        for level_index, level in enumerate(report):
             level = int(level)
 
             if level_index == 0:
@@ -46,5 +49,8 @@ with open(file_path, "r") as file:
 
             # agora que fizemos as comparações podemos comparar o `level` atual como visitado e ir pro próximo
             last_visited_level = level
+
+            if level_index == len(report) - 1:
+                safe_reports += 1
 
     print(safe_reports)
