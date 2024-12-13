@@ -1,7 +1,7 @@
 from pathlib import Path
 
 dir_path = Path(__file__).parent
-file_path = dir_path / "sample.txt"
+file_path = dir_path / "input.txt"
 
 
 MIN_SAFE_VARIATION = 1
