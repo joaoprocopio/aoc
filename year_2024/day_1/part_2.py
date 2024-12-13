@@ -38,9 +38,7 @@ while len(left_heap) > 0:
         continue
 
     occurrences_count = right_heap_occurrences[left_heap_smallest]
-    similarity_score = left_heap_smallest * occurrences_count
-
-    total_distance += similarity_score
+    total_distance += left_heap_smallest * occurrences_count
 
 
 print(total_distance)

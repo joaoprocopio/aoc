@@ -28,7 +28,6 @@ while len(left_heap) > 0 and len(right_heap) > 0:
 
     min_distance = min(left_heap_smallest, right_heap_smallest)
     max_distance = max(left_heap_smallest, right_heap_smallest)
-    distance_diff = max_distance - min_distance
-    total_distance = total_distance + distance_diff
+    total_distance += max_distance - min_distance
 
 print(total_distance)
