@@ -45,12 +45,13 @@ with open(file_path, "r") as file:
                 index += MUL_INSTR_LEN
                 continue
 
-            if (
-                last_l_paren_index is not None
-                and char == ")"
-                and len(line[last_l_paren_index + 1 : index]) in IN_PAREN_RANGE
-            ):
-                print(line[last_l_paren_index + 1 : index])
+            if (last_l_paren_index is not None) and (char == R_PAREN):
+                l_paren_substr = line[last_l_paren_index + 1 : index]
+
+                if (len(l_paren_substr) in IN_PAREN_RANGE) and (
+                    COMMA in l_paren_substr
+                ):
+                    print(l_paren_substr.split(COMMA))
 
             index += 1
 
