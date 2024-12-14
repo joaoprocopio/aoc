@@ -1,7 +1,7 @@
 from pathlib import Path
 
 dir_path = Path(__file__).parent
-file_path = dir_path / "sample.txt"
+file_path = dir_path / "input.txt"
 
 
 MUL = "mul"
@@ -30,7 +30,6 @@ with open(file_path, "r") as file:
     for line in file:
         index = 0
         last_l_paren_index = None
-        last_r_paren_index = None
         # total = 0
 
         while index < len(line):
@@ -46,9 +45,12 @@ with open(file_path, "r") as file:
                 index += MUL_INSTR_LEN
                 continue
 
-            if last_l_paren_index and char == ")":
-                last_r_paren_index = index
-                # print(line[last_l_paren_index + 1 : last_r_paren_index])
+            if (
+                last_l_paren_index is not None
+                and char == ")"
+                and len(line[last_l_paren_index + 1 : index]) in IN_PAREN_RANGE
+            ):
+                print(line[last_l_paren_index + 1 : index])
 
             index += 1
 
