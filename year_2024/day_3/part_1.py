@@ -27,10 +27,11 @@ IN_PAREN_RANGE = range(MIN_DIGITS * 2 + len(COMMA), MAX_DIGITS * 2 + len(COMMA) 
 # se a diferença entre o index do primeiro parenteses e a do último parenteses estiver entre 3 e 7, aí dá pra fazer o parse a multiplicação
 
 with open(file_path, "r") as file:
+    total = 0
+
     for line in file:
         index = 0
         last_l_paren_index = None
-        # total = 0
 
         while index < len(line):
             char = line[index]
@@ -51,8 +52,16 @@ with open(file_path, "r") as file:
                 if (len(l_paren_substr) in IN_PAREN_RANGE) and (
                     COMMA in l_paren_substr
                 ):
-                    print(l_paren_substr.split(COMMA))
+                    x, y = l_paren_substr.split(",")
+
+                    if not y.isdigit():
+                        y = "".join(char for char in y if char.isdigit())
+
+                    total += int(x) * int(y)
+
+                    # index += len(l_paren_substr)
+                    # continue
 
             index += 1
 
-        # print(total)
+    print(total)
