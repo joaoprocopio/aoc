@@ -59,9 +59,6 @@ with open(file_path, "r") as file:
 
                     total += int(x) * int(y)
 
-                    # index += len(l_paren_substr)
-                    # continue
-
             index += 1
 
     print(total)
