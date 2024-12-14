@@ -29,17 +29,26 @@ IN_PAREN_RANGE = range(MIN_DIGITS * 2 + len(COMMA), MAX_DIGITS * 2 + len(COMMA) 
 with open(file_path, "r") as file:
     for line in file:
         index = 0
-        last_mul_instr_index = None
+        last_l_paren_index = None
+        last_r_paren_index = None
         # total = 0
 
         while index < len(line):
-            if line[index : index + MUL_INSTR_LEN] == MUL_INSTR:
-                # encontra e guarda o index da substring que da match em `mul(`
-                last_mul_instr_index = index
+            char = line[index]
+            mul_instr_substr = line[index : index + MUL_INSTR_LEN]
+
+            if mul_instr_substr == MUL_INSTR:
+                # aqui dentro desse if, já encontramos a substring que da match em `mul(`
+                # pode dar um shift de 3 pro lado, e pegar o index do parenteses esquerdo
+                last_l_paren_index = index + len(MUL)
                 # agora que encontramos encontramos o que importa, podemos saltar
                 # isso aqui já vai cair dentro do corpo do parenteses, é só parsear e multiplicar
                 index += MUL_INSTR_LEN
                 continue
+
+            if last_l_paren_index and char == ")":
+                last_r_paren_index = index
+                # print(line[last_l_paren_index + 1 : last_r_paren_index])
 
             index += 1
 
