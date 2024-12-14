@@ -20,7 +20,7 @@ MAX_DIGITS = 3
 # o parenteses com menor corpo é tem o tamanho 3 e o de maior tamanho tem tamanho 7
 # sendo que, para o menor possível: mul(1,6) -> "1,6" -> len("1,6") -> 3
 # e para o maior possível: mul(380,420) -> "380,420" -> len("380,420") -> 7
-IN_PAREN_RANGE = range(MIN_DIGITS * 2 + len(COMMA), (MAX_DIGITS * 2 + len(COMMA)) + 1)
+IN_PAREN_RANGE = range(MIN_DIGITS * 2 + len(COMMA), MAX_DIGITS * 2 + len(COMMA) + 1)
 
 # procurar dentro da string por `mul(`, guarda o index que começa
 # uma vez que encontrar o `mul(`, procurar pelo próximo `)`, guarda o index
@@ -41,7 +41,6 @@ with open(file_path, "r") as file:
                 index += MUL_INSTR_LEN
                 continue
 
-            print(last_mul_instr_index)
             index += 1
 
         # print(total)
