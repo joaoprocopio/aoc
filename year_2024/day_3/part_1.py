@@ -1,7 +1,7 @@
 from pathlib import Path
 
 dir_path = Path(__file__).parent
-file_path = dir_path / "sample.txt"
+file_path = dir_path / "input.txt"
 
 
 MUL = "mul"
@@ -50,28 +50,23 @@ with open(file_path, "r") as file:
 
                 continue
 
-            if last_l_paren_index is not None:
-                if index - last_l_paren_index > max(IN_PAREN_RANGE):
-                    last_l_paren_index = None
+            if last_l_paren_index is not None and char == R_PAREN:
+                last_r_paren_index = index
+                l_paren_substr = line[last_l_paren_index + 1 : last_r_paren_index]
 
-                if char == R_PAREN:
-                    last_r_paren_index = index
-                    l_paren_substr = line[last_l_paren_index + 1 : last_r_paren_index]
+                if (len(l_paren_substr) in IN_PAREN_RANGE) and (
+                    COMMA in l_paren_substr
+                ):
+                    x, y = l_paren_substr.split(",")
 
-                    if (len(l_paren_substr) in IN_PAREN_RANGE) and (
-                        COMMA in l_paren_substr
-                    ):
-                        x, y = l_paren_substr.split(",")
+                    if not y.isdigit():
+                        index += 1
+                        continue
 
-                        if not y.isdigit():
-                            y = "".join(char for char in y if char.isdigit())
+                    x = int(x)
+                    y = int(y)
 
-                        x = int(x)
-                        y = int(y)
-
-                        sum_up += x * y
-
-                        # TODO: aqui precisa fazer o salto do tamanho correto
+                    sum_up += x * y
 
             index += 1
 
