@@ -1,7 +1,7 @@
 from pathlib import Path
 
 dir_path = Path(__file__).parent
-file_path = dir_path / "input.txt"
+file_path = dir_path / "sample.txt"
 
 
 MUL = "mul"
@@ -22,16 +22,18 @@ MAX_DIGITS = 3
 # e para o maior possível: mul(380,420) -> "380,420" -> len("380,420") -> 7
 IN_PAREN_RANGE = range(MIN_DIGITS * 2 + len(COMMA), MAX_DIGITS * 2 + len(COMMA) + 1)
 
+
 # procurar dentro da string por `mul(`, guarda o index que começa
 # uma vez que encontrar o `mul(`, procurar pelo próximo `)`, guarda o index
 # se a diferença entre o index do primeiro parenteses e a do último parenteses estiver entre 3 e 7, aí dá pra fazer o parse a multiplicação
 
 with open(file_path, "r") as file:
-    total = 0
+    sum_up = 0
 
     for line in file:
         index = 0
         last_l_paren_index = None
+        last_r_paren_index = None
 
         while index < len(line):
             char = line[index]
@@ -41,24 +43,36 @@ with open(file_path, "r") as file:
                 # aqui dentro desse if, já encontramos a substring que da match em `mul(`
                 # pode dar um shift de 3 pro lado, e pegar o index do parenteses esquerdo
                 last_l_paren_index = index + len(MUL)
+
                 # agora que encontramos encontramos o que importa, podemos saltar
                 # isso aqui já vai cair dentro do corpo do parenteses, é só parsear e multiplicar
                 index += MUL_INSTR_LEN
+
                 continue
 
-            if (last_l_paren_index is not None) and (char == R_PAREN):
-                l_paren_substr = line[last_l_paren_index + 1 : index]
+            if last_l_paren_index is not None:
+                if index - last_l_paren_index > max(IN_PAREN_RANGE):
+                    last_l_paren_index = None
 
-                if (len(l_paren_substr) in IN_PAREN_RANGE) and (
-                    COMMA in l_paren_substr
-                ):
-                    x, y = l_paren_substr.split(",")
+                if char == R_PAREN:
+                    last_r_paren_index = index
+                    l_paren_substr = line[last_l_paren_index + 1 : last_r_paren_index]
 
-                    if not y.isdigit():
-                        y = "".join(char for char in y if char.isdigit())
+                    if (len(l_paren_substr) in IN_PAREN_RANGE) and (
+                        COMMA in l_paren_substr
+                    ):
+                        x, y = l_paren_substr.split(",")
 
-                    total += int(x) * int(y)
+                        if not y.isdigit():
+                            y = "".join(char for char in y if char.isdigit())
+
+                        x = int(x)
+                        y = int(y)
+
+                        sum_up += x * y
+
+                        # TODO: aqui precisa fazer o salto do tamanho correto
 
             index += 1
 
-    print(total)
+    print(sum_up)
