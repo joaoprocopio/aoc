@@ -29,10 +29,10 @@ se encontrar um X:
     - posição (0, 2) é igual a A
     - posição (0, 3) é igual a S
 - vertical
-    - posição (0, 0,) é igual a X
-    - posição (1, 0,) é igual a M
-    - posição (2, 0,) é igual a A
-    - posição (3, 0,) é igual a S
+    - posição (0, 0) é igual a X
+    - posição (1, 0) é igual a M
+    - posição (2, 0) é igual a A
+    - posição (3, 0) é igual a S
 - diagonal 45°
 - diagonal 135°
 - diagonal 225°
@@ -53,7 +53,19 @@ with open(file_path, "r") as file:
         cols_index = 0
 
         while cols_index < matrix_cols_len:
-            print(matrix[rows_index][cols_index])
+            char = matrix[rows_index][cols_index]
+
+            if char == XMAS[0]:
+                vertical_match = [
+                    True
+                    for x_row_index, x_char_index, expected_char in XMAS_HORIZONTAL
+                    if rows_index + x_row_index < matrix_rows_len
+                    and cols_index + x_char_index < matrix_cols_len
+                    and expected_char
+                    == matrix[rows_index + x_row_index][cols_index + x_char_index]
+                ]
+                print(vertical_match)
+
             cols_index += 1
 
         rows_index += 1
