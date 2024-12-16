@@ -4,8 +4,12 @@ dir_path = Path(__file__).parent
 file_path = dir_path / "sample.txt"
 
 
-xmastrix = []
-xmascount = 0
+count = 0
+
+
+matrix = []
+matrix_rows_len = 0
+matrix_cols_len = 0
 
 
 XMAS = "XMAS"
@@ -38,6 +42,13 @@ se encontrar um X:
 
 with open(file_path, "r") as file:
     for line in file:
-        xmastrix.append([char for char in line.rstrip("\n")])
+        matrix.append([char for char in line.rstrip("\n")])
 
-    # print(xmascount)
+    matrix_rows_len = len(matrix)
+    matrix_cols_len = len(matrix[0])
+
+    rows_index = 0
+
+    while rows_index < matrix_rows_len:
+        print(matrix[rows_index])
+        rows_index += 1
