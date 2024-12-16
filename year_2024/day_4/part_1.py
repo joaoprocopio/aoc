@@ -50,5 +50,10 @@ with open(file_path, "r") as file:
     rows_index = 0
 
     while rows_index < matrix_rows_len:
-        print(matrix[rows_index])
+        cols_index = 0
+
+        while cols_index < matrix_cols_len:
+            print(matrix[rows_index][cols_index])
+            cols_index += 1
+
         rows_index += 1
