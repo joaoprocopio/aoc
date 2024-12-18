@@ -1,24 +1,27 @@
 from pathlib import Path
+from typing import Optional
 
 dir_path = Path(__file__).parent
 file_path = dir_path / "sample.txt"
 
+abc = Optional
 
 count = 0
 
 
-matrix = []
-matrix_rows_len = 0
-matrix_cols_len = 0
+matrix: list[list[str]] = []
+matrix_rows_len: int = 0
+matrix_cols_len: int = 0
 
 
 XMAS = "XMAS"
-XMAS_HORIZONTAL = [
-    (0, 0, XMAS[0]),
-    (0, 1, XMAS[1]),
-    (0, 2, XMAS[2]),
-    (0, 3, XMAS[3]),
-]
+DIRECTIONS = []
+
+"""
+( 1, -1) | ( 1,  0) | ( 1, 1)
+( 0, -1) | ( 0,  0) | ( 0, 1)
+(-1, -1) | (-1,  0) | (-1, 1)
+"""
 
 
 """
