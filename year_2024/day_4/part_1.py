@@ -4,25 +4,43 @@ dir_path = Path(__file__).parent
 file_path = dir_path / "sample.txt"
 
 
-count = 0
-
-
-matrix: list[list[str]] = []
-matrix_rows_len: int = 0
-matrix_cols_len: int = 0
+class XmasChar:
+    X = "X"
+    M = "M"
+    A = "A"
+    S = "S"
 
 
 XMAS = "XMAS"
-DIRECTIONS = []
 
-"""
-( 1, -1) | ( 1,  0) | ( 1, 1)
-( 0, -1) | ( 0,  0) | ( 0, 1)
-(-1, -1) | (-1,  0) | (-1, 1)
-"""
+UP: tuple[int, int] = (-1, 0)
+DOWN: tuple[int, int] = (1, 0)
+LEFT: tuple[int, int] = (0, -1)
+RIGHT: tuple[int, int] = (0, 1)
+LEFT_UP: tuple[int, int] = (-1, -1)
+LEFT_DOWN: tuple[int, int] = (1, -1)
+RIGHT_UP: tuple[int, int] = (-1, 1)
+RIGHT_DOWN: tuple[int, int] = (1, 1)
+
+DIRECTIONS: list[tuple[int, int]] = [
+    UP,
+    DOWN,
+    LEFT,
+    RIGHT,
+    LEFT_UP,
+    LEFT_DOWN,
+    RIGHT_UP,
+    RIGHT_DOWN,
+]
 
 
 with open(file_path, "r") as file:
+    count: int = 0
+
+    matrix: list[list[str]] = []
+    matrix_rows_len: int = 0
+    matrix_cols_len: int = 0
+
     for line in file:
         matrix.append([char for char in line.rstrip("\n")])
 
